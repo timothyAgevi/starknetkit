@@ -1,8 +1,8 @@
-import { connect } from "../main"
-import { ConnectOptions, ModalResult } from "../window/modal"
+import { connect } from "../main";
+import { ConnectOptions, ModalResult } from "../window/modal";
 
 type UseStarknetkitConnectors = {
-  starknetkitConnectModal: () => Promise<ModalResult>
+  starknetkitConnectModal: () => Promise<ModalResult>;
 }
 
 const useStarknetkitConnectModal = (
@@ -12,12 +12,12 @@ const useStarknetkitConnectModal = (
     return await connect({
       ...options,
       resultType: options.resultType ?? "connector",
-    })
+    });
   }
 
   return {
     starknetkitConnectModal,
-  }
+  };
 }
 
-export { useStarknetkitConnectModal }
+export { useStarknetkitConnectModal };
