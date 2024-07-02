@@ -1,1 +1,2 @@
-export * from "../TBAConnector";
+export * from "./TBAConnector";
+export { TokenboundConnector } from './TBAConnector';
