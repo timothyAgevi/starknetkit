@@ -1,6 +1,6 @@
 {
-  "name": "starknetkit",
-  "version": "2.2.11",
+  "name": "mystarknetkit",
+  "version": "1.0.0",
   "repository": "github:argentlabs/starknetkit",
   "private": false,
   "browser": {
@@ -78,7 +78,7 @@
     "@commitlint/config-conventional": "^17.7.0",
     "@semantic-release/git": "^10.0.1",
     "@sveltejs/vite-plugin-svelte": "^2.2.0",
-    "@tsconfig/svelte": "^5.0.0",
+    "@tsconfig/svelte": "^5.0.4",
     "@types/async-retry": "^1.4.5",
     "@types/lodash-es": "^4.17.8",
     "@types/node": "^20.5.7",
@@ -99,6 +99,8 @@
     "prettier-plugin-import-sort": "^0.0.7",
     "semantic-release": "^21.1.1",
     "starknet-types": "^0.7.2",
+    
+    "starknet5": "npm:starknet@5.29.0",
     "svelte": "^4.0.0",
     "svelte-check": "^3.5.1",
     "svelte-preprocess": "^5.0.4",
@@ -109,9 +111,7 @@
     "vite-plugin-dts": "^3.0.0",
     "vitest": "^1.6.0",
     "ws": "^8.8.1",
-    "zod": "^3.20.6",
-    "starknet4": "npm:starknet@4.22.0",
-    "starknet5": "npm:starknet@5.29.0"
+    "zod": "^3.20.6"
   },
   "peerDependencies": {
     "starknet": "^6.9.0"

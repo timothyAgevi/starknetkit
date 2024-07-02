@@ -1,8 +1,8 @@
-import { InvokeFunctionResponse, Signature } from "starknet"
-import { z } from "zod"
+import { InvokeFunctionResponse, Signature } from "starknet";
+import { z } from "zod";
 
-const HEX_REGEX = /^0x[0-9a-f]+$/i
-const DECIMAL_REGEX = /^\d+$/
+const HEX_REGEX = /^0x[0-9a-f]+$/i;
+const DECIMAL_REGEX = /^\d+$/;
 
 const shortStringSchema = z
   .string()
@@ -15,7 +15,7 @@ const shortStringSchema = z
   .refine(
     (value) => !DECIMAL_REGEX.test(value),
     "The shortString should not be an integer string",
-  )
+  );
 
 export const BigNumberishSchema = z.union([
   z
@@ -33,7 +33,7 @@ export const BigNumberishSchema = z.union([
   shortStringSchema,
   z.number().int("Only hex, integers and bigint are supported in calldata"),
   z.bigint(),
-])
+]);
 
 export const CallSchema = z.object({
   contractAddress: z.string(),
@@ -41,9 +41,9 @@ export const CallSchema = z.object({
   calldata: z
     .array(BigNumberishSchema.or(z.array(BigNumberishSchema)))
     .optional(),
-})
+});
 
-export const CallsArraySchema = z.array(CallSchema).nonempty()
+export const CallsArraySchema = z.array(CallSchema).nonempty();
 
 export const typedDataSchema = z.object({
   types: z.record(
@@ -69,7 +69,7 @@ export const typedDataSchema = z.object({
   primaryType: z.string(),
   domain: z.record(z.unknown()),
   message: z.record(z.unknown()),
-})
+});
 
 export const AssetSchema = z.object({
   type: z.literal("ERC20"),
@@ -80,7 +80,7 @@ export const AssetSchema = z.object({
     image: z.string().optional(),
     name: z.string().optional(),
   }),
-})
+});
 
 export const AddStarknetChainParametersSchema = z.union([
   z.object({
@@ -100,7 +100,6 @@ export const AddStarknetChainParametersSchema = z.union([
       nativeCurrency: AssetSchema.optional(),
       blockExplorerUrl: z.array(z.string()).optional(),
     })
-    // for backwards compatibility
     .transform((value) => ({
       id: value.id,
       chain_id: value.chainId,
@@ -109,7 +108,8 @@ export const AddStarknetChainParametersSchema = z.union([
       native_currency: value.nativeCurrency,
       block_explorer_url: value.blockExplorerUrl,
     })),
-])
+]);
+
 export const StarknetMethodArgumentsSchemas = {
   enable: z
     .tuple([
@@ -145,35 +145,35 @@ export const StarknetMethodArgumentsSchemas = {
       .optional(),
   ]),
   signMessage: z.tuple([typedDataSchema]),
-} as const
+} as const;
 
 export type StarknetMethods = {
   enable: (
     ...args: z.infer<typeof StarknetMethodArgumentsSchemas.enable>
-  ) => Promise<string[]>
+  ) => Promise<string[]>;
   addStarknetChain: (
     ...args: z.infer<typeof StarknetMethodArgumentsSchemas.addStarknetChain>
-  ) => Promise<boolean>
+  ) => Promise<boolean>;
   switchStarknetChain: (
     ...args: z.infer<typeof StarknetMethodArgumentsSchemas.switchStarknetChain>
-  ) => Promise<boolean>
+  ) => Promise<boolean>;
   watchAsset: (
     ...args: z.infer<typeof StarknetMethodArgumentsSchemas.watchAsset>
-  ) => Promise<boolean>
+  ) => Promise<boolean>;
   requestAccounts: (
     ...args: z.infer<typeof StarknetMethodArgumentsSchemas.requestAccounts>
-  ) => Promise<string[]>
+  ) => Promise<string[]>;
   execute: (
     ...args: z.infer<typeof StarknetMethodArgumentsSchemas.execute>
-  ) => Promise<InvokeFunctionResponse>
+  ) => Promise<InvokeFunctionResponse>;
   signMessage: (
     ...args: z.infer<typeof StarknetMethodArgumentsSchemas.signMessage>
-  ) => Promise<Signature>
+  ) => Promise<Signature>;
 
   getLoginStatus: () => Promise<
     | { isLoggedIn: false }
     | { isLoggedIn: true; hasSession: boolean; isPreauthorized: boolean }
-  >
+  >;
 }
 
 export const StarknetExecuteBackwardCompatibleArgumentsSchemas = {
@@ -201,30 +201,30 @@ export const StarknetExecuteBackwardCompatibleArgumentsSchemas = {
           .optional(),
       ]),
     ),
-} as const
+} as const;
 
 export type StarknetExecuteBackwardCompatibleMethods = {
   execute: (
     ...args: z.infer<
       typeof StarknetExecuteBackwardCompatibleArgumentsSchemas.execute
     >
-  ) => Promise<InvokeFunctionResponse>
+  ) => Promise<InvokeFunctionResponse>;
 }
 
 export type ConnectMethods = {
-  connect: () => void
+  connect: () => void;
 }
 
 export type ModalMethods = {
-  shouldShow: () => void
-  shouldHide: () => void
-  heightChanged: (height: number) => void
+  shouldShow: () => void;
+  shouldHide: () => void;
+  heightChanged: (height: number) => void;
 }
 
-export type WebWalletMethods = ConnectMethods & ModalMethods
+export type WebWalletMethods = ConnectMethods & ModalMethods;
 
 export type IframeMethods = {
-  connect: () => void
+  connect: () => void;
 }
 
 export const RpcCallSchema = z
@@ -237,14 +237,14 @@ export const RpcCallSchema = z
     contractAddress: contract_address,
     entrypoint: entry_point,
     calldata: calldata || [],
-  }))
+  }));
 
-export const RpcCallsArraySchema = z.array(RpcCallSchema).nonempty()
+export const RpcCallsArraySchema = z.array(RpcCallSchema).nonempty();
 
 const VERSIONS = {
   ZERO: 0,
   ONE: 1,
-} as const
+} as const;
 
 export const deployAccountContractSchema = z.object({
   address: z.string(),
@@ -252,6 +252,5 @@ export const deployAccountContractSchema = z.object({
   salt: z.string(),
   calldata: z.array(z.string()),
   sigdata: z.array(z.string()).optional(),
-  //version: z.literal([0, 1]),
-  version: z.nativeEnum(VERSIONS), // allow only 0 | 1, workaround since zod doesn't support literals as numbers
-})
+  version: z.nativeEnum(VERSIONS),
+});

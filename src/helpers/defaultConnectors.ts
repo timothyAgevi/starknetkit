@@ -29,7 +29,7 @@ export const defaultConnectors = ({
 
   defaultConnectors.push(new ArgentMobileConnector(argentMobileOptions));
   defaultConnectors.push(new WebWalletConnector({ url: webWalletUrl }));
-  defaultConnectors.push(new TokenboundConnector({ tokenboundAddress: "", parentAccountId: "" }));
+  defaultConnectors.push(new TokenboundConnector({ tokenboundAddress: "", parentAccountId: "" } as any)); // Ensure options are passed correctly
 
   return defaultConnectors;
 }
