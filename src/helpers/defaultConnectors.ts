@@ -1,3 +1,4 @@
+// src/helpers/defaultConnectors.ts
 import { Connector } from "../connectors";
 import { ArgentMobileConnector, type ArgentMobileConnectorOptions } from "../connectors/argentMobile";
 import { InjectedConnector } from "../connectors/injected";

@@ -1,3 +1,4 @@
+// src/connectors/TBAConnector/TBAConnector.ts
 import { Connector, ConnectorData, ConnectorEvents } from "../connector";
 import { TokenboundAccount } from "../../window/tokenboundAccount";
 import { getTokenboundStarknetWindowObject } from "../../window/TBAStarknetWindowObject";

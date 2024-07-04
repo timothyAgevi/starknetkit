@@ -2,4 +2,4 @@
 export * from './connectors';
 export * from './helpers';
 export * from './window';
-export { TokenboundConnector } from './connectors/TBAConnector/TBAConnector'; // Add this line
+export { TokenboundConnector } from './connectors/TBAConnector/TBAConnector';
